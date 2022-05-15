@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../../libraries/vue/vue.js"></script>
+
+</head>
+
+<style>
+    /*@page {*/
+    /*    size: 3in 15in;*/
+    /*}*/
+    /*body{*/
+    /*    height:300px;*/
+    /*}*/
+</style>
+<body>
+<div id='app' class="modal-card-body" style="max-height:500px">
+    <div v-for="item in modalDataContent">
+        <p v-if="item['type'] == 'text' && item['name'] != 'ticket_time' && item['name'] != 'barcode_data_img'"
+           v-bind:style="item['style'] + strReplaceCss(item['css'])"> {{ item['value']}}</p>
+        <p v-if="item['name'] == 'ticket_time'" v-bind:style="item['style'] + strReplaceCss(item['css'])">
+            {{ item['value']}}</p>
+                            <div v-if="item['type'] == 'image'" >
+                                <img class="is-rounded" :src="item['path']" v-bind:style="item['style'] + strReplaceCss(item['css'])" alt="Placeholder image">
+                            </div>
+
+        <div v-if="item['name'] == 'barcode_data_img'"
+             v-bind:style="item['style'] + strReplaceCss(item['css'])" v-html="item['value']">
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            modalDataContent: [],
+            params: null
+        },
+        created: function () {
+            this.params = new URLSearchParams(location.search)
+            this.modalDataContent = JSON.parse(this.params.get("queryKey"));
+        },
+        methods : {
+            strReplaceCss: function (data) {
+                if (typeof data == 'undefined' || data.length == 0) {
+                    return ''
+                }
+                let a = JSON.stringify(data)
+                a = a.replace('{', ';')
+                a = a.replaceAll('}', ';')
+                a = a.replaceAll('"', '')
+                a = a.replaceAll(',', ';')
+                return a
+            }
+        }
+    })
+
+    //console.log(location.href)   // YOUR_PATH/app/main.html?queryKey=queryValue#hashValue
+    console.log(location.search) // ?queryKey=queryValue
+    console.log(location.hash)   // #hashValue
+
+    // You'll probably want to use URLSearchParams
+    const params = new URLSearchParams(location.search)
+
+    console.log(params.get("queryKey")) // queryValue
+    window.addEventListener('DOMContentLoaded', () => {
+        //document.getElementById("name").innerHTML = params.get("queryKey");
+    })
+
+
+</script>
+</html>

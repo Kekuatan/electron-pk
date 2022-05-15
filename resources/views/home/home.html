@@ -1,0 +1,24 @@
+<button onclick="clickAku()">Click me</button>
+
+    <script>
+    function clickAku(){
+        (async () => {
+            const response = await window.api.doAction('some-name')
+            console.log('-----dari some-name-------')
+            console.log(response)
+            console.log('--------------------')
+        })();
+
+        (async () => {
+            const response = await window.api.send('toMain','some-aa')
+            console.log(response)
+        })();
+
+        (async () => {
+            const response = await window.api.receive('fromMain','some-aa')
+            console.log(response)
+        })();
+
+    }
+
+    </script>

@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Test for printer - thermal printers too",
+  "main": "main.js",
+  "productName": "parkir-exit",
+  "scripts": {
+    "start": " tasklist | find /i \"ffmpeg.exe\" && taskkill /im ffmpeg.exe /F && electron . || echo process \"ffmpeg.exe\" not running && electron . ",
+    "install": "electron-rebuild"
+  },
+  "author": "Dean k",
+  "devDependencies": {
+    "electron": "^13.1.6",
+    "electron-rebuild": "^2.3.5"
+  },
+  "dependencies": {
+    "@pokusew/pcsclite": "^0.6.0",
+    "any-shell-escape": "^0.1.1",
+    "axios": "^0.27.2",
+    "bwip-js": "^3.0.4",
+    "electron-reload": "^2.0.0-alpha.1",
+    "ffmpeg-static": "^4.4.1",
+    "form-data": "^4.0.0",
+    "nfc-pcsc": "^0.8.1",
+    "serialport": "^9.2.0",
+    "tableify": "^1.1.0",
+    "xhr2": "^0.2.1"
+  }
+}
