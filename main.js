@@ -5,7 +5,12 @@ const path = require("path");
 
 var HomeWindow = require('./app/Windows/HomeWindow.js')
 var TicketPrintingWindow = require('./app/Windows/TicketPrintingWindow.js')
+const {ApiConnectionService} = require("./app/Services/Api/ApiConnectionService");
+const {ConfigEnum} = require("./app/Enums/ConfigEnum");
+var SplashScreenWindow = require('./app/Windows/SplashScreenWindow.js')
+var LoginWindow = require('./app/Windows/LoginWindow.js')
 const {CaptureImageService} = require("./app/Services/CaptureImageService");
+
 // var CaptureImageWindow = require('./app/Windows/CaptureImageWindow.js')
 
 // const argv = process.argv.slice(2)
@@ -66,6 +71,7 @@ const {CaptureImageService} = require("./app/Services/CaptureImageService");
 
 app.allowRendererProcessReuse=false
 
+
 ipcMain.handle('some-name', async ()=>{
     const saveFile = () => {
         return new Promise((resolve, reject) => {
@@ -79,13 +85,58 @@ ipcMain.handle('some-name', async ()=>{
 })
 
 
+ipcMain.handle('login', async (event,payload)=>{
+    const login = () => {
+        return new Promise((resolve, reject) => {
+            console.log('main')
+            console.log(payload)
+            const key = ApiConnectionService.axios('/api/login', 'POST',
+                {
+                    'email': payload.email,
+                    'password': payload.password
+                }
+            )
+            key.then((response) => {
+                console.log('ticket create success')
+                this.response = response.data;
+                console.log(this.response)
+                resolve()
+            }).catch((error) => {
+                console.log('ticket create failed')
+                console.log(error.message)
+                console.log(error.response.data);
+                resolve()
+            });
+        })
+    }
+    await login()
+})
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+    console.log('splash')
+    SplashScreenWindow.createWindows()
+    SplashScreenWindow.win.on('ready-to-show', () => {
+        SplashScreenWindow.win.show();
+    })
+    SplashScreenWindow.win.webContents.on('did-finish-load', () => {
+        // splashPage.webContents.send('logo-change', client_state_object.LOGO);
+        let isLogged = false
+        if (isLogged) {
+            SplashScreenWindow.win.webContents.send('credentials-check', '1');
+        } else {
+            setTimeout(() => {
+                LoginWindow.createWindows()
+                console.log('splash done')
+                SplashScreenWindow.win.close();
+            }, 3000);
+        }
+    })
     // CaptureImageWindow.createWindows()
-    CaptureImageService.takeImage()
-    HomeWindow.createWindows()
+    // CaptureImageService.takeImage()
+    // HomeWindow.createWindows()
     // protocol.registerSchemesAsPrivileged([
     //   {
     //     privileges: {standard: true, secure: true}
@@ -99,6 +150,22 @@ app.whenReady().then(() => {
     app.on("closed", function () {
        console.log('closed')
     });
+
+    LoginWindow.win.on("ready", function () {
+        console.log('raeafafs')
+        protocol.registerFileProtocol('file', (request, cb) => {
+            console.log(request)
+            const url = request.url.replace('file:///', '')
+            const decodedUrl = decodeURI(url)
+            try {
+                return cb(decodedUrl)
+            } catch (error) {
+                console.error('ERROR: registerLocalResourceProtocol: Could not get file path:', error)
+            }
+        })
+    });
+
+
 
 
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link href="../../../public/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../public/css/style.css" />
+<!--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" href="../../../public/fonts/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" id="highlight" type="text/css" />
+
+    <style>
+        img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body class="user-select-none">
+<div class="page">
+    <div class="page-content pb-0">
+        <div class="card rounded-0" data-card-height="cover" style="height: 500px">
+            <div class="card-center pl-3 pr-3">
+                <div class="text-center mb-4 mt-4">
+                    <!-- <img id="logo-container"> -->
+                    <img style="width: 300px" src="../../../public/images/png/logo-client.png" />
+                </div>
+                <div class="ml-3 mr-4 mb-n3">
+                    <div class="input-style input-style-1 input-required">
+                        <span class="color-highlight input-style-1-inactive">Email/Nama Pengguna</span>
+                        <em>(required)</em>
+                        <input id="email" type="email" placeholder="Email/Nama Pengguna" />
+                    </div>
+                    <div class="input-style input-style-1 input-required mb-3">
+                        <span class="color-highlight input-style-1-inactive">Password Anda</span>
+                        <em>(required)</em>
+                        <input id="password" type="password" placeholder="Password Anda" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-check icon-check text-left float-left opacity-50">
+                        <input class="form-check-input" type="checkbox" value="" id="check4" />
+                        <i class="icon-check-2 fa fa-check-circle font-14 color-highlight"></i>
+                    </div>
+                    <a href="#" class="font-11 float-right color-theme opacity-70" data-menu="menu-reset">Lupa password?</a>
+                    <div class="clearfix"></div>
+                </div>
+                <a id="btn-login" href="#" class="btn btn-full gradient-highlight ml-3 mr-3 rounded-sm btn-l font-13 font-600 mt-5 border-0">Masuk</a>
+                <div class="d-flex mt-3 justify-content-center">
+                    <span class="text-center">Belum punya akun? Daftar</span>
+                    <a id="btn-register" href="#" class="font-600 ml-1">disini </a>
+                    <br></br>
+                    <span class="text-center">Apakah Anda admin?</span>
+
+                    <a id="btn-register" href="https://kubuku.id/perpus/" class="font-600 ml-1">Silakan login disini </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN: Forgot Password Modal Box -->
+    <div id="menu-reset" class="menu menu-box-modal rounded-m border border-gray-dark shadow-xl" data-menu-height="300" data-menu-width="350" style="height: 300px; width: 350px; display: block">
+        <div class="menu-title">
+            <h1 class="font-24">Lupa Password?</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+
+        <div class="content mb-0 mt-0">
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user font-11"></i>
+                <span>Username/E-mail</span>
+                <em>(required)</em>
+                <input id="username" type="name" placeholder="Username" />
+            </div>
+            <div class="row">
+                <div class="col-12">Masukkan e-mail / nama pengguna anda yang terdaftar di sistem kami</div>
+            </div>
+
+            <a href="#" id="btn-reset-password" class="btn btn-full btn-m shadow-l rounded-s font-600 bg-green-dark mt-4 close-menu">Kirim</a>
+        </div>
+    </div>
+    <!-- END -->
+</div>
+<script type="text/javascript" src="../../../public/js/jquery.js"></script>
+<script type="text/javascript" src="../../../public/js/utils.js"></script>
+<script type="text/javascript" src="../../../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../public/js/custom.js"></script>
+<script>
+    $('#btn-login').on('click', function (e) {
+        var email = $('#email').val();
+        var password = $('#password').val();
+
+        // showLoader('Harap tunggu');
+        var post_data = { email: email, password: password };
+        //setupCustomHeaders()
+        $('#email').val('');
+        $('#password').val('');
+
+        console.log('-----dari login-------');
+        (async () => {
+            const response = await window.api.login(post_data)
+            console.log('-----dari login-------')
+            console.log(response)
+            console.log('--------------------')
+        })();
+        //executePost(url_login, post_data, loginCallback);
+
+        //     if(validateEmail(email)){
+        //         if(validatePassword(password)){
+
+        //         } else {
+        //             showWarningMessage("Password minimal 8-karakter kombinasi huruf angka")
+        //         }
+        //     } else {
+        //         showWarningMessage("Harap masukan email dengan format yang benar")
+        //     }
+        //
+    });
+</script>
+</body>
+</html>

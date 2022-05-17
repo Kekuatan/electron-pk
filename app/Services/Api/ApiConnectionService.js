@@ -40,7 +40,7 @@ class ApiConnectionService {
      axios (url,type, payload, query) {
         url = ConfigEnum.base_url + url
         let form = new FormData();
-console.log(payload)
+
          for (var k in payload) {
              if (payload.hasOwnProperty(k)) {
                  if (k === 'picture_vehicle_in' ){
