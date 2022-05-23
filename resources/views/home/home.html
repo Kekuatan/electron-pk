@@ -1,4 +1,384 @@
-<button onclick="clickAku()">Click me</button>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link href="../../../public/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../public/css/style.css" />
+    <!--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" href="../../../public/fonts/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" id="highlight" type="text/css" />
+
+    <style>
+        img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<!--<button onclick="clickAku()">Click me</button>-->
+
+<div class="header position-sticky header-logo-left mb-3 shadow-l">
+    <div class="p-2 header-logo d-flex" style="width: 600px !important">
+        <img id="header-logo" src="../../../public/images/png/logo-client.png" class="img-fluid" style="max-width: 120px !important" />
+        <a id="btn-beranda" class="ml-4 btn color-black font-400 font-12 pt-1">Beranda</a>
+        <a id="btn-berita" class="ml-4 btn color-black font-400 font-12 pt-1">Berita</a>
+        <a id="btn-rak" class="ml-4 btn color-black font-400 font-12 pt-1">Rak Pinjam</a>
+        <a id="btn-donasi" class="ml-4 btn color-black font-400 font-12 pt-1">Donasi Buku</a>
+    </div>
+
+    <a id="user-image" href="#" class="header-icon header-icon-1 font-24 mr-3"><i class="fas fa-user-circle"></i></a>
+    <a id="shopping-cart" href="#" class="header-icon header-icon-2 font-20 mr-4"
+        ><div><i class="fas fa-shopping-cart"></i><span id="cart-badge" class="badge bg-red-dark font-8 ml-n2">5</span></div></a
+    >
+    <form class="header-icon header-icon-3 form-inline" style="right: 290px !important">
+        <input id="search-box" class="form-control" type="search" placeholder="Pencarian" aria-label="Search" style="height: 30px !important; width: 300px !important" />
+    </form>
+</div>
+<div class="page-content pb-0">
+    <div class="row mr-0 ml-0 mb-0">
+        <div class="col-4">
+            <div class="card card-style">
+                <div class="thumb-container">
+                    <a href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full" style="color: white" draggable="false" >Pintu Masuk</a>
+                    <div class="book-thumb-hover">
+                        <img src="../../../public/images/png/logo-client.png"  class="thumb-image img-fluid" style="min-height: 250px !important" draggable="false" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="card card-style">
+                <div class="thumb-container">
+                    <a href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full" style="color: white" draggable="false" >Pintu Keluar</a>
+                    <div class="book-thumb-hover">
+                        <img src="../../../public/images/png/logo-client.png"  class="thumb-image img-fluid" style="min-height: 250px !important" draggable="false" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row mr-0 ml-0 mb-0 pr-3">
+                <div class="col-3">
+                    <div class="card card-style">
+                        <div class=" thumb-container">
+                            <h5 href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full font-23" style="color: white" draggable="false" >Jam</h5>
+                            <div class=" text-justify ">
+
+                                <h5 class="rounded-xl p-3 font-23" style="margin:auto;text-align: center" id="clocklocal"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card card-style">
+                        <div class=" thumb-container">
+                            <h5 href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full font-23" style="color: white" draggable="false" >Shift</h5>
+                            <div class=" text-justify ">
+
+                                <h5 class="rounded-xl p-3 font-23" style="margin:auto;text-align: center" > Shift 1</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card card-style">
+                        <div class=" thumb-container">
+                            <h5 href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full font-23" style="color: white" draggable="false" >Pintu</h5>
+                            <div class=" text-justify ">
+
+                                <h5 class="rounded-xl p-3 font-23" style="margin:auto;text-align: center" > PK-1</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="">
+                        <div class="thumb-container">
+                            <div class="book-thumb-hover">
+                                <img src="../../../public/images/png/logo-client.png"  class="thumb-image img-fluid" style=" !important" draggable="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mr-0 ml-0 mb-0">
+                <div class="col-8">
+                    <div class="card card-style mr-2" style="">
+                        <a href="#" class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full" style="color: white" draggable="false" >Karcis </a>
+                        <p class="ml-3 mb-2">
+
+                        </p>
+
+                        <!--                <div class="d-flex mt-3">-->
+                        <!--                    <h5 class="rounded-xl p-3 bg-gray-dark mb-2 w-100">Pilih Metode Pembayaran</h5>-->
+                        <!--                </div>-->
+
+
+                        <!--                <div class="d-flex justify-content-center">-->
+                        <!--                    <span class="font-300 font-22">Please wait.. safely closing</span>-->
+                        <!--                </div>-->
+                        <div class="input-style input-style-2 ml-4 mr-4 mt-2 input-required">
+                            <span class="input-style-1-active input-style-1-inactive" style="background-color:#f8fbfb !important;">No Barcode</span>
+
+                            <em>(required)</em>
+                            <input id="barcode" type="text" placeholder="Scan nomer barcode pada ticket" />
+                        </div>
+
+                        <div class="input-style input-style-2 ml-4 mr-4 mt-2 input-required">
+                            <span class="input-style-1-active input-style-1-inactive" style="background-color:#f8fbfb !important;">Jenis kendaraan</span>
+                            <em><i class="fa fa-check color-green-dark"></i></em>
+                            <select id="vehicle" class="form-control">
+                                <option value="default" disabled="" selected="">Pilih jenis kendaraan</option>
+                                <option value="1">Motor</option>
+                                <option value="2">Mobil</option>
+                                <option value="3">Truck</option>
+                                <option value="4">Puso</option>
+                                <option value="5">Tronton</option>
+                                <option value="6">TNI/Polri</option>
+                                <option value="7">Cold/Diesel</option>
+                            </select>
+                            <div class="ml-3 p-2 " >
+                                <div  class="badge bg-blue-fade font-10 p-2  ml-n3 mt-n4 mr-3 mb-1">  Q : Motor </div>
+                                <div  class="badge bg-blue-fade font-10 p-2 ml-n3 mt-n4 mr-3 mb-1">  W : Mobil </div>
+                                <div  class="badge bg-blue-fade font-10 p-2  ml-n3 mt-n4 mr-3 mb-1">  E : Truck </div>
+                                <div  class="badge bg-blue-fade font-10 p-2 ml-n3 mt-n4 mr-3 mb-1">  R : Puso </div>
+                                <div  class="badge bg-blue-fade font-10 p-2  ml-n3 mt-n4 mr-3 mb-1">  T : Tronton </div>
+                                <div  class="badge bg-blue-fade font-10 p-2  ml-n3 mt-n4 mr-3 mb-1">  Y : TNI/Polri </div>
+                                <div  class="badge bg-blue-fade font-10 p-2 ml-n3 mt-n4 mr-3 mb-1">  U : Cold Diesel </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="input-style input-style-2 ml-4 mr-4 input-required">
+                            <span class="input-style-1-active input-style-1-inactive" style="background-color:#f8fbfb !important;">Keterangan</span>
+                            <input id="description" type="text" placeholder="Masukan keterangan jika ada" />
+                        </div>
+
+                        <!--                <p class="mb-n1 font-600 ml-4 caption-identitas">Unggah identitas anda</p>-->
+                        <!--                <div class="file-data mt-2 ml-4 mr-4">-->
+                        <!--                    <a id="upload-identitas" href="#" class="btn-full btn-xs bg-highlight shadow-s rounded-s">Unggah Foto</a>-->
+                        <!--                    &lt;!&ndash; <p class="upload-file-text color-white">Unggah Foto</p> &ndash;&gt;-->
+                        <!--                    <img id="file-identitas" src="images/empty.png" class="img-fluid mt-2">-->
+                        <!--                </div>-->
+
+                        <!--                <a id="btn-submit" href="#" class="btn btn-full gradient-highlight ml-4 mr-4 rounded-sm btn-l font-13 font-600 mt-4 border-0">Kirim</a>-->
+                        <!--                <a id="btn-back" href="#" class="btn btn-border btn-m btn-full mt-2 mb-3 ml-4 mr-4 rounded-sm font-600 border-blue-dark color-blue-dark bg-theme">Kembali</a>-->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card card-style">
+                        <div class="thumb-container">
+                            <h5 class="bg-gray-dark shadow-l btn btn-border btn-xs btn-full" style="color: white" draggable="false" >Rincian Harga</h5>
+                            <div class=" p-3 text-justify ">
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-600 mr-auto font-14">Jam Masuk</span>
+                                    <span id="sub-total" class="font-800 font-10">HH : MM : SS </span>
+                                </div>
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-600 mr-auto font-14">Jam Keluar</span>
+                                    <span id="sub-total" class="font-800 font-10">HH : MM : SS </span>
+                                </div>
+
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-600 mr-auto font-14">Durasi</span>
+                                    <span id="sub-total" class="font-800 font-10"> HH Jam </span>
+                                </div>
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-600 mr-auto font-14">Jenis Kendaraan</span>
+                                    <span id="sub-total" class="font-800 font-10"> ____ </span>
+                                </div>
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-600 mr-auto font-14">Tarif</span>
+                                    <span id="sub-total" class="font-800 font-10">Rp. 0</span>
+                                </div>
+
+                                <div class="divider mb-2 mt-2 bg-gray-dark ml-2 mr-2"></div>
+                                <div class="d-flex ml-2 mt-2 mr-2">
+                                    <span class="font-800 mr-auto color-black font-18">Total</span>
+                                    <span id="total" class="font-800 color-black font-18">Rp. 0</span>
+                                </div>
+                                <!--                        <div class="d-flex ml-2 mt-4 mr-2">-->
+                                <!--                            <a data-menu="menu-checkout" class="btn rounded-xl bg-blue-dark color-white-light w-100">Checkout</a>-->
+                                <!--                        </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mr-0 ml-0 mb-0">
+                <div class="col-2">
+                    <div class="">
+                        <div class="thumb-container">
+                            <div class="book-thumb-hover">
+                                <img src="../../../public/images/jpg/logo.jpg"  class="thumb-image img-fluid" style="max-height: 150px !important" draggable="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class=" p-3 text-justify ">
+                        <div class="d-flex ml-2 mt-2 mr-2 ">
+                            <span class="font-600 mr-auto font-14">Nama Petugas</span>
+                            <span  class="font-800 font-14"> Yerry Kurnia Aji</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript" src="../../../public/js/jquery.js"></script>
+<!--<script type="text/javascript" src="../../../public/js/utils.js"></script>-->
+<script type="text/javascript" src="../../../public/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="../../../public/js/custom.js"></script>-->
+<script>
+    (function($) {
+        var _timeoutHandler = 0,
+            _inputString = '',
+            _onKeypress = function(e) {
+
+                if (_timeoutHandler) {
+                    clearTimeout(_timeoutHandler);
+                    console.log('manual input')
+                }
+                if (e.keyCode !== 13){
+                    _inputString += e.key;
+                }
+
+                if ($(e.target).attr('id') !== 'description'){
+                    console.log(e.keyCode)
+                }
+                if (e.keyCode === 113) {
+                    document.getElementById('vehicle').value = 1
+                }
+                if (e.keyCode === 119) {
+                    document.getElementById('vehicle').value = 2
+                }
+                if (e.keyCode === 101) {
+                    document.getElementById('vehicle').value = 3
+                }
+                if (e.keyCode === 114) {
+                    document.getElementById('vehicle').value = 4
+                }
+                if (e.keyCode === 116) {
+                    document.getElementById('vehicle').value = 5
+                }
+                if (e.keyCode === 121) {
+                    document.getElementById('vehicle').value = 6
+                }
+                if (e.keyCode === 117) {
+                    document.getElementById('vehicle').value = 7
+                }
+
+                _timeoutHandler = setTimeout(function () {
+                    if (_inputString.length <= 3) {
+                        _inputString = '';
+                        return;
+                    }
+                    document.getElementById('barcode').value = _inputString
+                    if ($(e.target).attr('id') !== 'barcode'){
+                        $(e.target).val($(e.target).val().slice(0,(_inputString, $(e.target).val().length - _inputString.length)))
+                    }
+
+                    _inputString = '';
+
+                }, 20);
+            };
+        $('body').on({
+            keypress: _onKeypress
+        });
+    })($);
+
+    // var BarcodeScanerEvents = function() {
+    //     this.initialize.apply(this, arguments);
+    // };
+    //
+    // BarcodeScanerEvents.prototype = {
+    //     initialize: function() {
+    //         $(document).on({
+    //             keyup: $.proxy(this._keyup, this)
+    //         });
+    //     },
+    //     _timeoutHandler: 0,
+    //     _inputString: '',
+    //     _keyup: function (e) {
+    //         if (this._timeoutHandler) {
+    //             clearTimeout(this._timeoutHandler);
+    //             this._inputString += String.fromCharCode(e.which);
+    //         }
+    //
+    //         this._timeoutHandler = setTimeout($.proxy(function () {
+    //             if (this._inputString.length <= 3) {
+    //                 this._inputString = '';
+    //                 return;
+    //             }
+    //
+    //             $(document).trigger('onbarcodescaned', this._inputString);
+    //
+    //             this._inputString = '';
+    //
+    //         }, this), 20);
+    //     }
+    // };
+    // @this.set('date', dateText);
+    // BarcodeScanerEvents()
+
+    // $('body').on({
+    //     keypress: function() { typed_into = true; },
+    //     change: function() {
+    //         if (typed_into) {
+    //             alert('type');
+    //             typed_into = false; //reset type listener
+    //         } else {
+    //             alert('not type');
+    //         }
+    //     }
+    // });
+
+    // $(function () {
+    //     //Yes! use keydown because some keys are fired only in this trigger,
+    //     //such arrows keys
+    //     $("body").keydown(function (e) {
+    //         //well so you need keep on mind that your browser use some keys
+    //         //to call some function, so we'll prevent this
+    //         e.preventDefault();
+    //
+    //         //now we caught the key code.
+    //         var keyCode = e.keyCode || e.which;
+    //
+    //         //your keyCode contains the key code, F1 to F12
+    //         //is among 112 and 123. Just it.
+    //         console.log(keyCode);
+    //     });
+    // });
+</script>
+<script>
+    function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('clocklocal').innerHTML =  h + ":" + m + ":" + s;
+        setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+    startTime()
+</script>
 
     <script>
     function clickAku(){
@@ -10,15 +390,18 @@
         })();
 
         (async () => {
-            const response = await window.api.send('toMain','some-aa')
+            const response = await window.api.send1('toMain','some-aa')
             console.log(response)
         })();
-
         (async () => {
             const response = await window.api.receive('fromMain','some-aa')
-            console.log(response)
+            console.log('fromMain', response)
         })();
 
     }
+
+    window.api.receive("fromMain", (data) => {
+        console.log(`Received ${data} from main process`);
+    });
 
     </script>

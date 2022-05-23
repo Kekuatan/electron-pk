@@ -6,7 +6,6 @@ const serialport = require('serialport')
 const tableify = require('tableify')
 const ByteLength = require('@serialport/parser-byte-length')
 const Readline = require('@serialport/parser-readline')
-const {StorageService} = require("../../../app/Services/Storage/StorageService");
 
 const port = new serialport('COM4',
     {
@@ -58,10 +57,8 @@ const makeMp3 = shell([
 //     console.log('Data port readable:', port.read())
 // })
 
-let a = StorageService.getFromStorage('access_token')
-let b = StorageService.getFromStorage('user')
-console.log('go to aa ',a)
-console.log('go to bb ',b)
+
+
 // Switches the port into "flowing mode"
 port.on('data', function (data) {
     console.log('Data port  data:', data)
@@ -95,7 +92,7 @@ contextBridge.exposeInMainWorld(
                 return result
             })
         },
-        send1: (channel, data) => {
+        send: (channel, data) => {
             // whitelist channels
             let validChannels = ["toMain"];
             if (validChannels.includes(channel)) {
@@ -118,10 +115,6 @@ contextBridge.exposeInMainWorld(
 );
 
 
-ipcRenderer.on('user', function(event, args){
-    console.log('aaa',event,args)
-    a = args
-})
 
 
 const crypto = require('crypto')
@@ -136,15 +129,12 @@ contextBridge.exposeInMainWorld('nodeCrypto', {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    // console.log(a)
   const replaceText = (selector, text) => {
-      for (const key in user) {
-          const element = document.getElementById('user.shift')
-          if (element) element.innerText = text
-      }
+    const element = document.getElementById(selector)
+    if (element) element.innerText = text
+  }
 
-      for (const type of ['chrome', 'node', 'electron']) {
-          replaceText(`${type}-version`, process.versions[type])
-      }
+  for (const type of ['chrome', 'node', 'electron']) {
+    replaceText(`${type}-version`, process.versions[type])
   }
 })
