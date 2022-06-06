@@ -39,27 +39,28 @@ class ApiConnectionService {
 
      axios (url,type, payload, query) {
         url = ConfigEnum.base_url + url
-        let form = new FormData();
-
-         for (var k in payload) {
-             if (payload.hasOwnProperty(k)) {
-                 if (k === 'picture_vehicle_in' ){
-                     payload[k] = path.join(__dirname,'../../..'+ payload[k])
-                     form.append(k, fs.createReadStream(payload[k]));
-                 } else {
-                     form.append(k, payload[k]);
-                 }
-
-
-
-             }
-         }
-        // const file =  fs.readFile(pathName);
-        console.log('b')
-        // form.append('file', file, 'my-image.jpg')
-
-        let key = this.token
         if (type.toLowerCase() === 'post'){
+            let form = new FormData();
+            console.log('form : ' , payload)
+            for (var k in payload) {
+                if (payload.hasOwnProperty(k)) {
+                    if (k === 'picture_vehicle_in' ){
+                        payload[k] = path.join(__dirname,'../../..'+ payload[k])
+                        form.append(k, fs.createReadStream(payload[k]));
+                    } else {
+                        form.append(k, payload[k]);
+                    }
+
+
+
+                }
+            }
+            // const file =  fs.readFile(pathName);
+            console.log('b')
+            // form.append('file', file, 'my-image.jpg')
+
+            let key = this.getToken()
+            console.log('token : ' , key)
             return Axios.post(url, form, {
                 headers: {
                     'Accept': 'application/json',
@@ -67,7 +68,21 @@ class ApiConnectionService {
                     'Content-Type': `multipart/form-data`,
                 }
             })
+        } else {
+            return Axios.get(url, {
+                headers: {
+                    'Accept': 'application/json',
+                }
+            })
         }
+    }
+
+    getToken (){
+        return this.token
+    }
+
+    setToken(access_token){
+        this.token = access_token
     }
 
 }

@@ -1,19 +1,27 @@
-
 // constructor function for the Cat class
 
 const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
+const defaults = {
+    // 800x600 is the default size of our window
+    windowBounds: {width: 800, height: 600},
+    access_token: null,
+    user: null,
+    vehicles: null
+}
 
 class Store {
-    constructor(opts) {
+    constructor(opts ={}) {
         // Renderer process has to get `app` module via `remote`, whereas the main process can get it directly
         // app.getPath('userData') will return a string of the user's app data directory path.
-        const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+        const userDataPath = opts.dataPath ??(electron.app || electron.remote.app).getPath('userData');
+        const configName = opts.configName ?? 'parkir-client'
         // We'll use the `configName` property to set the file name and path.join to bring it all together as a string
-        this.path = path.join(userDataPath, opts.configName + '.json');
-
-        this.data = parseDataFile(this.path, opts.defaults);
+        this.path = path.join(userDataPath, configName + '.json');
+        console.log(this.path)
+        console.log('path: ' + this.path)
+        this.data = parseDataFile(this.path, defaults);
     }
 
     // This will just return the property on the `data` object
@@ -37,7 +45,8 @@ function parseDataFile(filePath, defaults) {
     // `fs.readFileSync` will return a JSON string which we then parse into a Javascript object
     try {
         return JSON.parse(fs.readFileSync(filePath));
-    } catch(error) {
+    } catch (error) {
+        console.log('parseDatafile errror back to default')
         // if there was some kind of error, return the passed in defaults instead.
         return defaults;
     }
